@@ -1,0 +1,35 @@
+version: '3.3'
+services:
+  drupal:
+    container_name: drupal
+    image: drupal:latest
+    ports:
+      - 80:80
+    volumes:
+      - drupal_modules:/var/www/html/modules
+      - drupal_profiles:/var/www/html/profiles
+      - drupal_sites:/var/www/html/sites
+      - drupal_themes:/var/www/html/themes
+    networks:
+      - drupal_network
+  postgres:
+    container_name: psql
+    image: postgres:10
+    ports:
+      - 5432:5432
+    volumes:
+      - psql_data:/var/lib/postgresql/data
+    networks:
+      - drupal_network
+    environment:
+      POSTGRES_PASSWORD: ishaq1
+
+
+volumes:
+  drupal_modules:
+  drupal_profiles:
+  drupal_sites:
+  drupal_themes:
+  psql_data:
+networks:
+  drupal_network:

@@ -1,0 +1,31 @@
+version: '3.3'
+services:
+  wordpress:
+    container_name: wordpress_web
+    image: wordpress
+    ports:
+      - "8095:80"
+    volumes:
+      - ./code_dir:/var/www/html
+    networks:
+      - wordpress_net
+    depends_on:
+      - mariadb
+  mariadb:
+    container_name: wordpress_db
+    image: mariadb
+    environment:
+      MYSQL_ROOT_PASSWORD: ishaq1
+      MYSQL_DATABASE: ishaqtech
+    volumes:
+      - ./db_data:/var/lib/mysql
+    networks:
+      - wordpress_net
+    ports:
+      - "3306:3306"
+
+
+networks:
+   wordpress_net:
+
+mkdir code_dir and db_data inside the folder 
